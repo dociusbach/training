@@ -17,7 +17,7 @@ pipeline{
             stage('Create Tomcat Docker'){
                 steps{
                     // sh 'docker build . -t joshPortfolio:'
-                    echo 'build docker'
+                    docker.build("")
                 }
             }
             stage('Stage'){
