@@ -5,7 +5,7 @@ pipeline{
             stage('Test'){
                 
                 steps{
-                    sh 'mvn -f mvn/PortfilioWeb/pom.xml clean package'
+                    sh 'mvn -f hohtrainingapp/pom.xml clean package'
                 }
                 post{
                     success{
@@ -16,12 +16,13 @@ pipeline{
             }
             stage('Create Tomcat Docker'){
                 steps{
-                    sh 'docker build . -t joshPortfolio:'
+                    // sh 'docker build . -t joshPortfolio:'
+                    echo 'build docker'
                 }
             }
-            stage('Deploy'){
+            stage('Stage'){
                 steps{
-                    echo 'This is the first stage where we are Deploying'
+                    echo 'Stage Container'
                 }
             }
     
