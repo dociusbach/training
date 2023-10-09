@@ -20,7 +20,7 @@ pipeline{
 
                     echo 'Logging into ECR'
                   
-                    sh "docker build -t 730074989023.dkr.ecr.us-east-1.amazonaws.com/myrepo:latest -f dockerfile"
+                    sh "docker build -t 730074989023.dkr.ecr.us-east-1.amazonaws.com/myrepo:latest . "
                     
                 }
             }
