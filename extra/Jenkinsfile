@@ -1,0 +1,31 @@
+pipeline{
+
+    agent any
+    stages{
+            stage('Test'){
+                
+                steps{
+                    sh 'mvn -f mvn/PortfilioWeb/pom.xml clean package'
+                }
+                post{
+                    success{
+                        echo "Archiving Package..."
+                        archiveArtifacts artifacts: '**/*.war'
+                    }
+                }
+            }
+            stage('Create Tomcat Docker'){
+                steps{
+                    sh "docker build . -t ${ACTIVE_CONTAINER}"
+                }
+            }
+            stage('Deploy'){
+                steps{
+                    echo 'This is the first stage where we are Deploying'
+                    echo "ssh ${JENKINS_USER} @ ${CONTAINER_HOST}  /bin/bash -c 'docker run --name ${CONTAINER_NAME} --publish ${CONTAINER_PORTS} ${CONTAINER_IMAGE_NAME}:latest'"
+                }
+            }
+    
+        }
+}
+
