@@ -1,0 +1,20 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% set active_page = "home" %}{%block content%}
+
+<br />
+<form method="POST" enctype=multipart/form-data>
+  <h3 align="center">Project Name</h3>
+  <div class="form-group">
+    <label for="projectname">Project Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="projectname"
+      name="projectname"
+      placeholder="Enter Project Name"
+      required
+    />
+  </div>
+  <br />
+  <br />
+  <button type="submit" class="btn btn-primary">Submit</button>
+{%endblock%}

@@ -1,0 +1,128 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% set active_page = "home" %}{%block content%}
+<br />
+<h1>This is the Groups Page</h1>
+<form method="POST">
+    <div class="row ">
+    <div class="col-lg-4 ">
+  <button type="button" class="btn btn-primary", onclick="window.location.href ='{{ url_for('location.new_group') }}';"> Add New Group</button>
+  </div>
+  <div class="col-lg-4 ">
+  <button type="button" class="btn btn-primary", onclick="window.location.href ='{{ url_for('location.add_member_group') }}';"> Add members to a Group</button>
+  </div>
+  
+  </form>
+<br/>
+<br/>
+<br/>
+  <div class="container-fluid content-row">
+  
+    {% for group in mygroups %} 
+    {% if (loop.index) == 1 %}
+    <h1>Assigned Groups</h1>
+    <div class="row ">
+    
+      <div class="col-lg-4 d-flex align-items-stretch">
+        <div class="card text-white bg-dark mb-3 h-100" style="width: 18rem">
+          <div class="card-header">
+            
+            <h5>{{ group.name }}<h5>
+          </div>
+        </div>
+      </div>
+      {% elif ('%0.2f'| format(loop.index/3 | float
+    % 1)) == '0.33' %}
+    <div class="row ">
+    
+      <div class="col-lg-4 d-flex align-items-stretch">
+        <div class="card text-white bg-dark mb-3 h-100" style="width: 18rem">
+          <div class="card-header">
+            
+            
+            <h5>{{ group.name }}<h5>
+          </div>
+      
+        </div>
+      </div>
+      {% elif ('%0.2f'| format(loop.index/3 | float
+    % 1)) == '0.00' %}
+    <div class="col-lg-4 d-flex align-items-stretch">
+      <div class="card text-white bg-dark mb-3 h-100" style="width: 18rem">
+        <div class="card-header">
+          
+            <h5>{{ group.name }}<h5>
+        </div>
+      
+      </div>
+    </div>
+  </div>
+  
+  <br/>
+      {% else %}
+      <div class="col-lg-4 d-flex align-items-stretch">
+        <div class="card text-white bg-dark mb-3 h-100" style="width: 18rem">
+          <div class="card-header">
+            
+            <h5>{{ group.name }}<h5></div>
+         
+        </div>
+      </div>
+  
+  
+  
+      {% endif %} {% endfor %}
+    </div>
+    <div class="container-fluid content-row">
+      <br/>
+      <br/>
+      
+    {% for group in mggroups %}
+    {% if (loop.index) == 1 %}
+    <h1>Managed Groups</h1>
+    <div class="row ">
+    
+      <div class="col-lg-4 d-flex align-items-stretch">
+        <div class="card text-white bg-dark mb-3 h-100" style="width: 18rem">
+          <div class="card-header">
+            
+            <h5>{{ group.name }}<h5>
+          </div>
+        </div>
+      </div> {% elif ('%0.2f'| format(loop.index/3 | float
+    % 1)) == '0.33' %}
+    <div class="row ">
+    
+      <div class="col-lg-4 d-flex align-items-stretch">
+        <div class="card text-white bg-dark mb-3 h-100" style="width: 18rem">
+          <div class="card-header">
+            
+            <h5>{{ group.name }}<h5>
+          </div>
+        </div>
+      </div>
+      {% elif ('%0.2f'| format(loop.index/3 | float
+    % 1)) == '0.00' %}
+    <div class="col-lg-4 d-flex align-items-stretch">
+      <div class="card text-white bg-dark mb-3 h-100" style="width: 18rem">
+        <div class="card-header">
+          
+            <h5>{{ group.name }}<h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <br/>
+      {% else %}
+      <div class="col-lg-4 d-flex align-items-stretch">
+        <div class="card text-white bg-dark mb-3 h-100" style="width: 18rem">
+          <div class="card-header">
+            
+            <h5>{{ group.name }}<h5></div>
+        </div>
+      </div>
+    
+      {% endif %} {% endfor %}
+    </div>
+    {% endblock %}
+  </div>
+  

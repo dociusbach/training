@@ -1,0 +1,5 @@
+FROM python/python3.8:latest
+
+RUN pip install flask && pip install Flask-SQLAlchemy && pip install flask-login && from werkzeug.security import generate_password_hash, check_password_hash
+
+

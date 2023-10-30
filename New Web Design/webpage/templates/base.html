@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <link
+      rel="stylesheet"
+      href='{{ url_for("static", filename="bootstrap.min.css") }}'
+    />
+    <link
+      rel="stylesheet"
+      href='{{ url_for("static", filename="fontawesome.min.css") }}'
+    />
+    
+
+    <title>{%block title%}TITLE{%endblock%}</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbar">
+        <object
+            data='{{ url_for("static", filename="images/Booz_Allen_Hamilton_logo.png") }}'
+            ,
+            width="300"
+            ,
+            height="50"
+          ></object>
+          <h2 class="navbar-nav mx-auto">
+            <small class="text-muted">Training Management</small>
+          </h2>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          
+          {% if user.is_authenticated %} {% set navigation_bar = [
+          ('/auth_home', 'home', 'Home'), ('/Competitions', 'competitions', 'Competitions'),
+          ('/People', 'people', 'People'), ('/Training', 'training',
+          'Training'), ('/About', 'about', 'About Us') ] -%} {% set active_page
+          = active_page|default('home') -%} 
+          <ul class="navbar-nav ml-auto" >
+            {% for href, id, caption in navigation_bar %}
+            <li {% if id== active_page %} class="nav-item active" {% endif %}>
+              <a class=" nav-link " href="{{ href|e }}"
+                >{{ caption|e }}</a
+              >
+            </li>
+
+            {% endfor %}
+          </ul>
+
+          <div class="dropdown">
+            <button
+              class="btn dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <img
+                class="rounded-circle"
+                alt="avatar1"
+                src="{{ profile_picture }}"
+              />
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">Profile</a>
+
+              <a class="dropdown-item" href="/Groups"> Groups </a>
+
+              <a class="dropdown-item" href="/Logout">Logout</a>
+            </div>
+          </div>
+
+          {% else %} {% set navigation_bar = [ ('/', 'home', 'Home'), ('/About',
+          'about', 'About') ] -%} {% set active_page =
+          active_page|default('home') -%}  {% for href, id, caption in
+          navigation_bar %}
+          <ul class="navbar-nav ml-auto" id="navigation">
+            <li {% if id== active_page %} class="active" {% endif %}>
+              <a class="nav-item nav-link" href="{{ href|e }}"
+                >{{ caption|e }}</a
+              >
+            </li>
+            {% endfor %}
+          </ul>
+          <ul class="navbar-nav ml-auto">
+            <a class="nav-item nav-link" id="login" href="/Login">Login</a>
+            <a class="nav-item nav-link" id="signUp" href="/Register"
+              >Sign Up</a
+            >
+          </ul>
+
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %} {% for category, message in messages %} {% if category ==
+    'error'%}
+    <div class="alert alert-danger alter-dismissable fade show" role="alert">
+      {{ message }}
+
+      <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    {% else %}
+    <div class="alert alert-success alter-dismissable fade show" role="alert">
+      {{ message }}
+
+      <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endif %} {% endfor %} {% endif %} {% endwith %}
+    <div class="container-xl">{% block content%} {% endblock %}</div>
+    <script src='{{ url_for("static", filename="jquery.js") }}'></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script src='{{ url_for("static", filename="bootstrap.min.js") }}'></script>
+    
+  </body>
+</html>
